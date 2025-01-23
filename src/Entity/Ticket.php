@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Entity;
+use App\Entity\User;
 
 use App\Enum\prioriteTicketEnum;
+use App\Enum\StatutTicketEnum;
 use App\Repository\TicketRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,19 +24,6 @@ class Ticket
 
     #[ORM\Column(enumType: prioriteTicketEnum::class)]
     private ?prioriteTicketEnum $priorite = null;
-
-    #[ORM\Column(enumType: prioriteTicketEnum::class)]
-    private ?prioriteTicketEnum $statut = null;
-
-    #[ORM\ManyToOne(inversedBy: 'tickets')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $idAuteur = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -73,54 +62,6 @@ class Ticket
     public function setPriorite(prioriteTicketEnum $priorite): static
     {
         $this->priorite = $priorite;
-
-        return $this;
-    }
-
-    public function getStatut(): ?prioriteTicketEnum
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(prioriteTicketEnum $statut): static
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
-
-    public function getIdAuteur(): ?User
-    {
-        return $this->idAuteur;
-    }
-
-    public function setIdAuteur(?User $idAuteur): static
-    {
-        $this->idAuteur = $idAuteur;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }
