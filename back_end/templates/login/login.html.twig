@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <style>
+        /* Corps de la page */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(to right, #4e73df, #6c9fff);
+            height: 100vh;
+        }
+
+        /* Conteneur principal */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Carte de connexion */
+        .login-card {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Formulaire */
+        .login-form {
+            padding: 20px;
+        }
+
+        .login-form h1 {
+            margin-bottom: 20px;
+            color: #4e73df;
+        }
+
+        /* Champs du formulaire */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Bouton de connexion */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background: #4e73df;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #375ab6;
+        }
+
+        /* Liens supplémentaires */
+        .text-center {
+            margin-top: 10px;
+        }
+
+        .text-center a {
+            color: #4e73df;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-form">
+                <h1 class="h4 text-gray-900 mb-4">Connexion</h1>
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <form method="post" action="{{ path('app_login') }}">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="_email" value="{{ _email }}" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe:</label>
+                        <input type="password" id="password" name="_password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="remember_me" name="_remember_me">
+                        <label for="remember_me">Se souvenir de moi</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">Se connecter</button>
+                </form>
+                <hr>
+                <div class="text-center">
+                    <a class="small" href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
+                </div>
+                <div class="text-center">
+                    <a class="small" href="{{ path('app_registration') }}">Créer un compte</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
