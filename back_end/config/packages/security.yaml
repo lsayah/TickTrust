@@ -28,7 +28,7 @@ security:
             
             logout:
                 path: app_logout
-                target: app_home
+                target: app_login
 
     # Contrôle d'accès (Access Control)
     access_control:
