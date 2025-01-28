@@ -1,0 +1,45 @@
+
+
+
+.ticket-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+  
+  .ticket-list th, .ticket-list td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+  }
+  
+  .ticket-list th {
+    background-color: #f4f4f4;
+  }
+  
+  .ticket-list .importance {
+    width: 10px;
+  }
+  
+  .ticket-list .importance.low {
+    background-color: green;
+  }
+  
+  .ticket-list .importance.medium {
+    background-color: orange;
+  }
+  
+  .ticket-list .importance.high {
+    background-color: red;
+  }
+  
+  .ticket-list .details-link {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .ticket-list .details-link:hover {
+    text-decoration: none;
+  }
+

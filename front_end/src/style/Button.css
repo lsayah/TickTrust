@@ -1,0 +1,32 @@
+
+
+
+.btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .btn i {
+    margin-right: 8px;
+  }
+  
+  .AddTicketBtn {
+    background-color: var(--first-btn-color);
+    color: white;
+  }
+  
+  .SendTicketBtn {
+    background-color: var(--second-btn-color);
+    color: black;
+  }
+  
+  .AddFileBtn {
+    background-color: var(--second-btn-color);
+    color: black;
+  }

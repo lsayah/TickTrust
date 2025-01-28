@@ -1,0 +1,46 @@
+/* filepath: /C:/Users/Amazi/Desktop/TickTrust/front_end/src/style/MiniStats.css */
+.mini-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chart-container {
+    flex: 1;
+    max-width: 300px;
+  }
+  
+  .stats-container {
+    display: flex;
+    flex: 2;
+    justify-content: space-around;
+  }
+  
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .stat-card p {
+    margin: 0.5rem 0 0;
+    font-size: 1.5rem;
+    color: #555;
+  }
