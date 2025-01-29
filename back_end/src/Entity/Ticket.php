@@ -2,74 +2,83 @@
 
 namespace App\Entity;
 
-
-use App\Enum\PrioriteTicketEnum;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TicketRepository;
+use App\Enum\PrioriteTicketEnum;
+use App\Enum\StatutTicketEnum;
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TicketRepository::class)]
 class Ticket
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idTicket = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $category = null;
+
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
-    #[ORM\Column(enumType: prioriteTicketEnum::class)]
-    private ?prioriteTicketEnum $priorite = null;
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(enumType: prioriteTicketEnum::class)]
-    private ?prioriteTicketEnum $statut = null;
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'tickets')]
+    #[ORM\Column(type: 'integer')]
+    private ?int $priorite = null;
+
+    #[ORM\Column(type: 'integer')]
+    private ?int $statut = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $idAuteur = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
-
-    /**
-     * @var Collection<int, Message>
-     */
-    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'idTicket')]
-    private Collection $messages;
-
-    /**
-     * @var Collection<int, Affectation>
-     */
-    #[ORM\OneToMany(targetEntity: Affectation::class, mappedBy: 'idTicket')]
-    private Collection $affectations;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $attachment = null;
 
     public function __construct()
     {
-        $this->messages = new ArrayCollection();
-        $this->affectations = new ArrayCollection();
+        $this->priorite = PrioriteTicketEnum::NORMALE->value;
+        $this->statut = StatutTicketEnum::NOUVEAU->value; 
     }
+
+    // Getters and setters...
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdTicket(): ?int
+    public function getTitle(): ?string
     {
-        return $this->idTicket;
+        return $this->title;
     }
 
-    public function setIdTicket(int $idTicket): static
+    public function setTitle(string $title): static
     {
-        $this->idTicket = $idTicket;
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
@@ -82,42 +91,6 @@ class Ticket
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getPriorite(): ?prioriteTicketEnum
-    {
-        return $this->priorite;
-    }
-
-    public function setPriorite(prioriteTicketEnum $priorite): static
-    {
-        $this->priorite = $priorite;
-
-        return $this;
-    }
-
-    public function getStatut(): ?prioriteTicketEnum
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(prioriteTicketEnum $statut): static
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
-
-    public function getIdAuteur(): ?User
-    {
-        return $this->idAuteur;
-    }
-
-    public function setIdAuteur(?User $idAuteur): static
-    {
-        $this->idAuteur = $idAuteur;
 
         return $this;
     }
@@ -145,6 +118,56 @@ class Ticket
 
         return $this;
     }
+
+    public function getPriorite(): ?PrioriteTicketEnum
+    {
+        return PrioriteTicketEnum::from($this->priorite);
+    }
+
+    public function setPriorite(PrioriteTicketEnum $priorite): static
+    {
+        $this->priorite = $priorite->value;
+
+        return $this;
+    }
+
+    public function getStatut(): ?StatutTicketEnum
+    {
+        return StatutTicketEnum::from($this->statut);
+    }
+
+    public function setStatut(StatutTicketEnum $statut): static
+    {
+        $this->statut = $statut->value;
+
+        return $this;
+    }
+
+    public function getIdAuteur(): ?User
+    {
+        return $this->idAuteur;
+    }
+
+    public function setIdAuteur(?User $idAuteur): static
+    {
+        $this->idAuteur = $idAuteur;
+
+        return $this;
+    }
+
+    public function getAttachment(): ?string
+    {
+        return $this->attachment;
+    }
+
+    public function setAttachment(?string $attachment): static
+    {
+        $this->attachment = $attachment;
+
+        return $this;
+    }
+
+
 
     /**
      * @return Collection<int, Message>
@@ -176,7 +199,7 @@ class Ticket
         return $this;
     }
 
-    /**
+     /**
      * @return Collection<int, Affectation>
      */
     public function getAffectations(): Collection

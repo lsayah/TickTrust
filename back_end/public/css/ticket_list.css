@@ -1,0 +1,59 @@
+/* Styles pour la table des tickets */
+.ticket-list {
+  width: calc(
+    100% - 40px
+  ); /* Prendre toute la largeur de l'écran avec une marge de 20px de chaque côté */
+  margin: 20px auto; /* Centrer la table horizontalement et ajouter une marge verticale */
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.ticket-list thead {
+  background-color: #f8f9fc;
+}
+
+.ticket-list th,
+.ticket-list td {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  text-align: left;
+}
+
+.ticket-list th {
+  font-weight: bold;
+}
+
+.ticket-list tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Styles pour les priorités des tickets */
+.ticket-priority {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.ticket-priority.basse {
+  background-color: green;
+}
+
+.ticket-priority.normale {
+  background-color: yellow;
+}
+
+.ticket-priority.haute {
+  background-color: red;
+}
+
+/* Styles pour les liens */
+.ticket-more a {
+  color: #4e73df;
+  text-decoration: none;
+}
+
+.ticket-more a:hover {
+  text-decoration: none;
+  color: #858796;
+}

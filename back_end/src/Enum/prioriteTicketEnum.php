@@ -1,5 +1,5 @@
 <?php
-// src/Enum/PrioriteTicketEnum.php
+
 namespace App\Enum;
 
 enum PrioriteTicketEnum: int
@@ -8,8 +8,7 @@ enum PrioriteTicketEnum: int
     case NORMALE = 1;
     case HAUTE = 2;
 
-    // Optionnellement, tu peux ajouter des méthodes pour des labels lisibles
-    public function label(): string
+    public function toString(): string
     {
         return match ($this) {
             self::BASSE => 'Basse priorité',
@@ -17,6 +16,7 @@ enum PrioriteTicketEnum: int
             self::HAUTE => 'Haute priorité',
         };
     }
+
 
     // Optionnellement, tu peux ajouter une méthode pour récupérer l'intensité de la priorité
     public function getIntensity(): int

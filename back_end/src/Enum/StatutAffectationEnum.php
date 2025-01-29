@@ -9,6 +9,7 @@ enum StatutAffectationEnum: string
     case TERMINE = 'terminé';
     case EN_COURS = 'en cours';
     case NON_RESOLU = 'non résolu';
+    case NOUVEAU = 'Nouveau';
 
     public function label(): string
     {

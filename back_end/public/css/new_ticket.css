@@ -1,0 +1,79 @@
+/* Global Styles */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #d9eceb;
+}
+
+/* Ticket Form Styles */
+.ticket-form-container {
+  max-width: 80%; /* Augmenter la largeur maximale du formulaire */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-form-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.ticket-form-container .form-group {
+  margin-bottom: 15px;
+}
+
+.ticket-form-container .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.ticket-form-container .form-group input,
+.ticket-form-container .form-group textarea,
+.ticket-form-container .form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.ticket-form-container .form-group textarea {
+  resize: vertical;
+}
+
+.ticket-form-container .form-group.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 5%;
+  margin-top: 5%;
+}
+
+.ticket-form-container .btn-primary,
+.ticket-form-container .btn-secondary {
+  width: 20%;
+  padding: 10px;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ticket-form-container .btn-primary {
+  background-color: #317873; /* Couleur pour le bouton "Submit Ticket" */
+}
+
+.ticket-form-container .btn-primary:hover {
+  background-color: #5fcfc8; /* Couleur au survol pour le bouton "Submit Ticket" */
+}
+
+.ticket-form-container .btn-secondary {
+  background-color: #6c757d; /* Couleur pour le bouton "Save as Draft" */
+}
+
+.ticket-form-container .btn-secondary:hover {
+  background-color: #b1b4b7; /* Couleur au survol pour le bouton "Save as Draft" */
+}
