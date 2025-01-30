@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des techniciens</title>
+    <link rel="stylesheet" href="{{ asset('css/technicians.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Liste des techniciens</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Rechercher un technicien...">
+        </div>
+        <div class="technician-list" id="technicianList">
+            {% for technician in technicians %}
+                <div class="technician-card">
+                    <h2>{{ technician.nom }} {{ technician.prenom }}</h2>
+                    <p>Service: {{ technician.service }}</p>
+                    <p>Rôle: {{ technician.role }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var filter = this.value.toLowerCase();
+            var cards = document.querySelectorAll('.technician-card');
+            cards.forEach(function(card) {
+                var name = card.querySelector('h2').textContent.toLowerCase();
+                var service = card.querySelector('p:nth-child(2)').textContent.toLowerCase();
+                var role = card.querySelector('p:nth-child(3)').textContent.toLowerCase();
+                if (name.includes(filter) || service.includes(filter) || role.includes(filter)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

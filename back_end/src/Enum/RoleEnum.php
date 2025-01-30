@@ -1,20 +1,18 @@
 <?php
-// src/Enum/RoleEnum.php
 namespace App\Enum;
 
 enum RoleEnum: string
 {
-    case ADMIN = 'admin';
-    case TECHNICIAN = 'technician';
-    case USER = 'user';
+    case ROLE_ADMIN = 'ROLE_ADMIN';
+    case ROLE_TECHNICIAN = 'ROLE_TECHNICIAN';
+    case ROLE_USER = 'ROLE_USER';
 
-    // Optionnellement, tu peux ajouter des méthodes pour l'affichage ou d'autres fonctionnalités
     public function label(): string
     {
         return match ($this) {
-            self::ADMIN => 'Administrateur',
-            self::TECHNICIAN=> 'Technicien',
-            self::USER => 'Utilisateur',
+            self::ROLE_ADMIN => 'Administrateur',
+            self::ROLE_TECHNICIAN => 'Technicien',
+            self::ROLE_USER => 'Utilisateur',
         };
     }
 }

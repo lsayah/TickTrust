@@ -17,8 +17,5 @@ enum StatutTicketEnum: int
         };
     }
 
-    public function getIntensity(): int
-    {
-        return $this->value;
-    }
+   
 }

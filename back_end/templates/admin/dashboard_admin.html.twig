@@ -19,7 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/dashboard_admin.css">
 
 </head>
 
@@ -67,7 +67,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tickets:</h6>
-                        <a class="collapse-item" href="{{ path('ticket_new') }}">Add Ticket</a>
+                        <a class="collapse-item" href="{{ path('ticket_new') }}">Gerer Tickets</a>
                         <a class="collapse-item" href="{{ path('ticket_list') }}">Ticket List</a>
                         <a class="collapse-item" href="cards.html">Assignation</a>
                         <a class="collapse-item" href="cards.html">Intervention</a>
@@ -114,7 +114,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Employess:</h6>
                         <a class="collapse-item" href="{path()}">Services</a>
-                        <a class="collapse-item" href="register.html">Technicien List</a>
+                        <a class="collapse-item" href="{{ path('technician_list') }}">Technicien List</a>
                         <a class="collapse-item" href="forgot-password.html">Assignation</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Client:</h6>

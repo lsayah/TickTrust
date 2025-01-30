@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\TicketRepository;
 use App\Enum\PrioriteTicketEnum;
 use App\Enum\StatutTicketEnum;
+use App\Enum\ServiceEnum;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -46,10 +47,14 @@ class Ticket
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $attachment = null;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $service = null;
+
     public function __construct()
     {
         $this->priorite = PrioriteTicketEnum::NORMALE->value;
-        $this->statut = StatutTicketEnum::NOUVEAU->value; 
+        $this->statut = StatutTicketEnum::NOUVEAU->value;
+        $this->service = ServiceEnum::NONE->value;
     }
 
     // Getters and setters...
@@ -167,37 +172,18 @@ class Ticket
         return $this;
     }
 
-
-
-    /**
-     * @return Collection<int, Message>
-     */
-    public function getMessages(): Collection
+    public function getService(): ?ServiceEnum
     {
-        return $this->messages;
+        return ServiceEnum::from($this->service);
     }
 
-    public function addMessage(Message $message): static
+    public function setService(ServiceEnum $service): static
     {
-        if (!$this->messages->contains($message)) {
-            $this->messages->add($message);
-            $message->setIdTicket($this);
-        }
+        $this->service = $service->value;
 
         return $this;
     }
 
-    public function removeMessage(Message $message): static
-    {
-        if ($this->messages->removeElement($message)) {
-            // set the owning side to null (unless already changed)
-            if ($message->getIdTicket() === $this) {
-                $message->setIdTicket(null);
-            }
-        }
-
-        return $this;
-    }
 
      /**
      * @return Collection<int, Affectation>

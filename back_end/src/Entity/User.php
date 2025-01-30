@@ -2,6 +2,7 @@
 namespace App\Entity;
 
 use App\Enum\RoleEnum;
+use App\Enum\ServiceEnum; // Ajoutez cette ligne
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -32,6 +33,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(enumType: RoleEnum::class)]
     private ?RoleEnum $role = null;
 
+    #[ORM\Column(enumType: ServiceEnum::class)] // Utilisez enumType pour ServiceEnum
+    private ?ServiceEnum $service = null;
+
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $emailVerifiedAt = null;
 
@@ -57,6 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->tickets = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->affectations = new ArrayCollection();
+        $this->service = ServiceEnum::NONE; 
     }
 
     public function getId(): ?int
@@ -132,6 +137,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRole(RoleEnum $role): static
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    public function getService(): ?ServiceEnum
+    {
+        return $this->service;
+    }
+
+    public function setService(ServiceEnum $service): self
+    {
+        $this->service = $service;
 
         return $this;
     }

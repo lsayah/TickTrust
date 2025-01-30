@@ -1,0 +1,112 @@
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: #f8f9fc;
+}
+
+/* sidebar */
+.sidebar {
+  background-color: #317873 !important;
+}
+
+.sidebar .nav-item .nav-link {
+  color: #fff !important;
+}
+
+.sidebar .nav-item .nav-link:hover {
+  color: #fff !important;
+  background-color: #275e5e !important; /* Optionnel : couleur de survol */
+}
+
+.sidebar .sidebar-heading {
+  color: #fff !important;
+}
+
+/* Styles pour l'historique des tickets */
+.ticket-history {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ticket-history li {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.ticket-history li:hover {
+  background-color: #f8f9fc;
+}
+
+.ticket-history li a:hover {
+  text-decoration: none;
+}
+
+.ticket-history .ticket-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ticket-history .ticket-details div {
+  margin-bottom: 5px;
+}
+
+.ticket-history .ticket-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Styles pour les boutons */
+#content-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#content {
+  flex: 1;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card .card-body {
+  padding: 20px;
+}
+
+.card .card-body .text-xs {
+  font-size: 0.75rem;
+}
+
+.card .card-body .h5 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.card .card-body .text-gray-800 {
+  color: #5a5c69;
+}
+
+.card .card-body .text-primary {
+  color: #4e73df;
+}
+
+.card .card-body .text-success {
+  color: #1cc88a;
+}
+
+.btn-primary {
+  background-color: #317873;
+  
+}
+
+.btn-primary:hover {
+  background-color: #71d7d0;
+
+}

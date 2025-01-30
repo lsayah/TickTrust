@@ -1,4 +1,3 @@
-{# filepath: /C:/Users/Amazi/Desktop/TickTrust/back_end/templates/Ticket/List.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Liste des Tickets{% endblock %}
@@ -30,7 +29,7 @@
                     <td>
                         <span class="ticket-priority {% if ticket.priorite == 0 %}basse{% elseif ticket.priorite == 1 %}normale{% elseif ticket.priorite == 2 %}haute{% endif %}"></span>
                     </td>
-                    <td>{{ ticket.title }}</td>
+                    <td><a href="{{ path('ticket_details', { 'id': ticket.id }) }}">{{ ticket.title }}</a></td>
                     <td>{{ ticket.category }}</td>
                     <td>{{ ticket.description }}</td>
                     <td>{{ ticket.statut.toString() }}</td>

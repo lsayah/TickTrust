@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(to right, #317873, #cbdcdb);
+    height: 100vh;
+}
+
+/* Conteneur principal */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Carte de connexion */
+.login-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Formulaire */
+.login-form {
+    padding: 20px;
+}
+
+.login-form h1 {
+    margin-bottom: 20px;
+    color: #317873;
+}
+
+/* Champs du formulaire */
+.form-group {
+    margin-bottom: 15px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Bouton de connexion */
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    background: #317873;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #71d7d0;
+}
+
+/* Liens supplémentaires */
+.text-center {
+    margin-top: 10px;
+}
+
+.text-center a {
+    color: #71d7d0;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}

@@ -4,17 +4,22 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #d9eceb;
+  background: linear-gradient(to right, #317873, #cbdcdb) !important;
 }
 
 /* Ticket Form Styles */
 .ticket-form-container {
-  max-width: 80%; /* Augmenter la largeur maximale du formulaire */
+  max-width: 80%; 
+  height: 100vh;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-fluid {
+    background: linear-gradient(to right, #317873, #cbdcdb) !important;
 }
 
 .ticket-form-container h1 {
