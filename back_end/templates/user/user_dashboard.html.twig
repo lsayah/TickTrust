@@ -1,0 +1,30 @@
+{# filepath: templates/dashboard/user_dashboard.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}User Dashboard{% endblock %}
+
+{% block sidebar %}
+    <!-- User specific sidebar content -->
+    <li class="nav-item">
+        <a class="nav-link"  href="{{ path('user_dashboard') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" {# href="{{ path('user_create_ticket') }}" #}>
+            <i class="fas fa-fw fa-plus"></i>
+            <span>Create a Ticket</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link"{#  href="{{ path('user_ticket_list') }}" #}>
+            <i class="fas fa-fw fa-list"></i>
+            <span>My Tickets</span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block body %}
+    
+{% endblock %}

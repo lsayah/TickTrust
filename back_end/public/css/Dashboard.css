@@ -1,0 +1,110 @@
+
+.sidebar {
+    background-color: #317873 !important;
+  }
+  
+  .sidebar .nav-item .nav-link {
+    color: #fff !important;
+  }
+  
+  .sidebar .nav-item .nav-link:hover {
+    color: #fff !important;
+    background-color: #275e5e !important; /* Optionnel : couleur de survol */
+  }
+  
+  .sidebar .sidebar-heading {
+    color: #fff !important;
+  }
+  
+  /* Ticket Overview Card */
+  .chart-pie {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-xs {
+    font-size: 0.75rem;
+  }
+  
+  .font-weight-bold {
+    font-weight: 700;
+  }
+  
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+  
+  .text-gray-800 {
+    color: #5a5c69;
+  }
+  
+  .text-success {
+    color: #1cc88a;
+  }
+  
+  .text-warning {
+    color: #f6c23e;
+  }
+  
+  .text-danger {
+    color: #e74a3b;
+  }
+  
+  .text-primary {
+    color: #4e73df;
+  }
+  
+  /* ticket List */
+  
+  .ticket-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ticket-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e3e6f0;
+  }
+  
+  .ticket-item:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  
+  .ticket-item.legend {
+    font-weight: bold;
+    background-color: #f8f9fc;
+  }
+  
+  .ticket-priority {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+  }
+  
+  .ticket-request-number,
+  .ticket-title,
+  .ticket-service,
+  .ticket-assigned,
+  .ticket-status,
+  .ticket-more {
+    flex: 1;
+    padding: 0 10px;
+  }
+  
+  .ticket-more a {
+    color: #4e73df;
+    text-decoration: none;
+  }
+  
+  .ticket-more a:hover {
+    text-decoration: underline;
+  }
+  

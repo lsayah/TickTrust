@@ -8,3 +8,26 @@ _security_logout:
     resource: security.route_loader.logout
     type: service
 
+
+# config/routes.yaml
+admin_dashboard:
+    path: /admin/dashboard
+    controller: App\Controller\AdminController::dashboard
+
+technician_dashboard:
+    path: /technician/dashboard
+    controller: App\Controller\TechnicianController::dashboard
+
+user_dashboard:
+    path: /user/dashboard
+    controller: App\Controller\UserController::dashboard
+
+app_home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+
+app_logout_success:
+    path: /logout-success
+    controller: App\Controller\LogoutController::logoutSuccess
+

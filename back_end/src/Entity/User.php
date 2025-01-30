@@ -30,16 +30,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(enumType: RoleEnum::class)]
-    private ?RoleEnum $role = null;
+    private ?RoleEnum $role = RoleEnum::USER;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $emailVerifiedAt = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $CreatedAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $UpdatedAt = null;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(targetEntity: Ticket::class, mappedBy: 'idAuteur')]
     private Collection $tickets;
@@ -59,6 +59,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->affectations = new ArrayCollection();
     }
 
+    // --- GETTERS & SETTERS --- //
+
     public function getId(): ?int
     {
         return $this->id;
@@ -72,7 +74,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -84,7 +85,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
-
         return $this;
     }
 
@@ -96,7 +96,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -108,7 +107,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -120,7 +118,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPlainPassword(?string $plainPassword): static
     {
         $this->plainPassword = $plainPassword;
-
         return $this;
     }
 
@@ -132,7 +129,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRole(RoleEnum $role): static
     {
         $this->role = $role;
-
         return $this;
     }
 
@@ -144,31 +140,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmailVerifiedAt(?\DateTimeImmutable $emailVerifiedAt): static
     {
         $this->emailVerifiedAt = $emailVerifiedAt;
-
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->CreatedAt;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $CreatedAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->CreatedAt = $CreatedAt;
-
+        $this->createdAt = $createdAt;
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
-        return $this->UpdatedAt;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $UpdatedAt): static
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
-        $this->UpdatedAt = $UpdatedAt;
-
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 
@@ -177,9 +170,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return [$this->role->value];
     }
 
-    public function getSalt(): ?string
+    public function getUserIdentifier(): string
     {
-        return null;
+        return $this->email;
     }
 
     public function eraseCredentials(): void
@@ -187,40 +180,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->plainPassword = null;
     }
 
-    public function getUserIdentifier(): string
-    {
-        return $this->email;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->email;
-    }
-
+    // --- RELATIONS --- //
+    
     public function getTickets(): Collection
     {
         return $this->tickets;
-    }
-
-    public function addTicket(Ticket $ticket): static
-    {
-        if (!$this->tickets->contains($ticket)) {
-            $this->tickets->add($ticket);
-            $ticket->setIdAuteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTicket(Ticket $ticket): static
-    {
-        if ($this->tickets->removeElement($ticket)) {
-            if ($ticket->getIdAuteur() === $this) {
-                $ticket->setIdAuteur(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getMessages(): Collection
@@ -228,50 +192,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->messages;
     }
 
-    public function addMessage(Message $message): static
-    {
-        if (!$this->messages->contains($message)) {
-            $this->messages->add($message);
-            $message->setIdAuteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMessage(Message $message): static
-    {
-        if ($this->messages->removeElement($message)) {
-            if ($message->getIdAuteur() === $this) {
-                $message->setIdAuteur(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getAffectations(): Collection
     {
         return $this->affectations;
-    }
-
-    public function addAffectation(Affectation $affectation): static
-    {
-        if (!$this->affectations->contains($affectation)) {
-            $this->affectations->add($affectation);
-            $affectation->setIdUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAffectation(Affectation $affectation): static
-    {
-        if ($this->affectations->removeElement($affectation)) {
-            if ($affectation->getIdUser() === $this) {
-                $affectation->setIdUser(null);
-            }
-        }
-
-        return $this;
     }
 }
