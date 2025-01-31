@@ -1,0 +1,51 @@
+.ticket-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+  }
+  
+  .ticket-list th, .ticket-list td {
+    padding: 12px 15px;
+  }
+  
+  .ticket-list th {
+    font-weight: bold;
+    background-color: #f8f9fc;
+    color: #333;
+  }
+  
+  .ticket-list tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Styles pour les priorités des tickets */
+  .ticket-priority {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .ticket-priority.basse {
+    background-color: green;
+  }
+  
+  .ticket-priority.normale {
+    background-color: yellow;
+  }
+  
+  .ticket-priority.haute {
+    background-color: red;
+  }
+  
+  /* Styles pour les liens */
+  .ticket-list a {
+    color: #4e73df;
+    text-decoration: none;
+  }
+  
+  .ticket-list a:hover {
+    text-decoration: underline;
+  }

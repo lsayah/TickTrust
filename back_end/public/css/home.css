@@ -1,0 +1,70 @@
+/* Fond en gradient */
+body {
+    background: linear-gradient(to right, #317873, #cbdcdb);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Centrer les éléments */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Styles pour les boutons */
+.btn-primary {
+    background-color: #317873;
+    border-color: #317873;
+}
+
+.btn-primary:hover {
+    background-color: #71d7d0;
+    border-color: #71d7d0;
+}
+
+.btn-success {
+    background-color: #317873;
+    border-color: #317873;
+}
+
+.btn-success:hover {
+    background-color: #71d7d0;
+    border-color: #71d7d0;
+}
+
+/* Styles pour le texte */
+.text-center {
+    text-align: center;
+}
+
+.text-gray-900 {
+    color: #3a3b45;
+}
+
+.text-gray-800 {
+    color: #5a5c69;
+}
+
+/* Styles pour les images */
+.bg-login-image {
+    background: url('path/to/your/image.jpg');
+    background-size: cover;
+    background-position: center;
+}

@@ -12,14 +12,14 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/dashboard_admin.css">
+  <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/dashboard_admin.css') }}">
 
 </head>
 
@@ -58,6 +58,29 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
+            
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-ticket-alt"></i>
+                    <span>Gestion</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                      <h6 class="collapse-header">Employess:</h6>
+                        <a class="collapse-item" href="{path()}">Services</a>
+                          <a class="collapse-item" href="{path()}">Ajouter un utilisateurs</a>
+                        <a class="collapse-item" href="{{ path('technician_list') }}">List des techniciens</a>
+                      
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Client:</h6>
+                        <a class="collapse-item" href="404.html">Partenaire</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
+            
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -68,12 +91,12 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tickets:</h6>
                         <a class="collapse-item" href="{{ path('ticket_new') }}">Gerer Tickets</a>
-                        <a class="collapse-item" href="{{ path('ticket_list') }}">Ticket List</a>
-                        <a class="collapse-item" href="cards.html">Assignation</a>
                         <a class="collapse-item" href="cards.html">Intervention</a>
                     </div>
                 </div>
+            
             </li>
+        
 
             <!-- Nav Item - Employees Collapse Menu -->
             <li class="nav-item">
@@ -354,7 +377,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -703,21 +726,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
 </body>
 

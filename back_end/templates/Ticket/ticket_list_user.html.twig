@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des Tickets{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ticket_list_user.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Historique des Tickets</h1>
+
+    <table class="ticket-list">
+        <thead>
+            <tr>
+                <th>Priorité</th>
+                <th>Titre</th>
+                <th>Catégorie</th>
+                <th>Description</th>
+                <th>Statut</th>
+                <th>Auteur</th>
+                <th>Date de création</th>
+                <th>Date de mise à jour</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td>
+                        <span class="ticket-priority {% if ticket.priorite == 0 %}basse{% elseif ticket.priorite == 1 %}normale{% elseif ticket.priorite == 2 %}haute{% endif %}"></span>
+                    </td>
+                    <td><a href="{{ path('ticket_details', { 'id': ticket.id }) }}">{{ ticket.title }}</a></td>
+                    <td>{{ ticket.category }}</td>
+                    <td>{{ ticket.description }}</td>
+                    <td>{{ ticket.statut.toString() }}</td>
+                    <td>{{ ticket.idAuteur.username }}</td>
+                    <td>{{ ticket.createdAt|date('Y-m-d H:i') }}</td>
+                    <td>{{ ticket.updatedAt|date('Y-m-d H:i') }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun ticket trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

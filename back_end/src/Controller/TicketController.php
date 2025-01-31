@@ -119,4 +119,28 @@ class TicketController extends AbstractController
             'ticketHistory' => $ticketHistory,
         ]);
     }
+
+    #[Route('/tickets/user', name: 'user_ticket_list')]
+    public function userTicketList(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage): Response
+    {
+        $token = $tokenStorage->getToken();
+        if (null === $token) {
+            throw new AccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
+
+        $user = $token->getUser();
+        if (!is_object($user)) {
+            throw new AccessDeniedException('Vous devez être connecté pour accéder à cette page.');
+        }
+
+        // Récupérer tous les tickets de l'utilisateur
+        $tickets = $entityManager->getRepository(Ticket::class)->findBy(
+            ['idAuteur' => $user],
+            ['createdAt' => 'DESC']
+        );
+
+        return $this->render('Ticket/ticket_list_user.html.twig', [
+            'tickets' => $tickets,
+        ]);
+    }
 }
