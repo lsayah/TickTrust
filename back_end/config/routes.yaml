@@ -31,3 +31,14 @@ app_logout_success:
     path: /logout-success
     controller: App\Controller\LogoutController::logoutSuccess
 
+
+
+# Tickets
+
+ticket_new:
+    path: /ticket/new
+    controller: App\Controller\TicketController::new
+
+ticket_list:
+    path: /ticket/list
+    controller: App\Controller\TicketController::list

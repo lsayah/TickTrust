@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ticket;
+use App\Entity\User;
 use App\Form\TicketType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,6 +36,15 @@ class TicketController extends AbstractController
             $ticket->setCreatedAt(new \DateTimeImmutable());
             $ticket->setUpdatedAt(new \DateTimeImmutable());
             $ticket->setIdAuteur($user); // Assigner l'auteur du ticket à l'utilisateur connecté
+
+            // Assigner automatiquement un technicien libre
+            $technician = $entityManager->getRepository(User::class)->findOneBy(['role' => 'ROLE_TECHNICIAN', 'isAvailable' => true]);
+            if ($technician) {
+                $ticket->setTechnician($technician);
+                $technician->setIsAvailable(false); // Marquer le technicien comme non disponible
+                $entityManager->persist($technician);
+            }
+
             $entityManager->persist($ticket);
             $entityManager->flush();
 
@@ -64,7 +74,7 @@ class TicketController extends AbstractController
             throw $this->createNotFoundException('Le ticket n\'existe pas.');
         }
 
-        return $this->render('ticket/details.html.twig', [
+        return $this->render('ticket/ticket_details.html.twig', [
             'ticket' => $ticket,
         ]);
     }

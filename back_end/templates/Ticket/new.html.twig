@@ -1,7 +1,7 @@
-
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/new_ticket.css') }}">
 {% endblock %}
@@ -24,7 +24,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ path('dashboard_user') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -48,7 +48,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ticket:</h6>
                         <a class="collapse-item" href="{{ path('ticket_new') }}">Nouveau Ticket</a>
-                        <a class="collapse-item" href="cards.html">Tout Mes Tickets</a>
+                        <a class="collapse-item" href="{{ path('user_ticket_list') }}">Tout Mes Tickets</a>
                         <a class="collapse-item" href="cards.html">Statistique des tickets</a>
                     </div>
                 </div>
@@ -114,11 +114,26 @@
                                 {{ form_widget(form.attachment) }}
                                 {{ form_errors(form.attachment) }}
                             </div>
-                            <button type="submit" class="btn btn-primary">Créer</button>
+                            <div class="form-group text-center">
+                                {{ form_widget(form.save_draft, { 'attr': { 'class': 'btn btn-secondary mx-2' } }) }}
+                                {{ form_widget(form.submit, { 'attr': { 'class': 'btn btn-primary mx-2' } }) }}
+                            </div>
                         {{ form_end(form) }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 {% endblock %}

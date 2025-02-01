@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Entity;
 
 use App\Enum\RoleEnum;
-use App\Enum\ServiceEnum; // Ajoutez cette ligne
+use App\Enum\ServiceEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -33,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(enumType: RoleEnum::class)]
     private ?RoleEnum $role = RoleEnum::USER;
 
-    #[ORM\Column(enumType: ServiceEnum::class)] // Utilisez enumType pour ServiceEnum
+    #[ORM\Column(enumType: ServiceEnum::class)]
     private ?ServiceEnum $service = null;
 
     #[ORM\Column(nullable: true)]
@@ -54,6 +55,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Affectation::class, mappedBy: 'idUser')]
     private Collection $affectations;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isAvailable = true;
+
     private ?string $plainPassword = null;
 
     public function __construct()
@@ -61,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->tickets = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->affectations = new ArrayCollection();
-        $this->service = ServiceEnum::NONE; 
+        $this->service = ServiceEnum::NONE;
     }
 
     // --- GETTERS & SETTERS --- //
@@ -145,7 +149,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setService(ServiceEnum $service): self
     {
         $this->service = $service;
-
         return $this;
     }
 
@@ -195,6 +198,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
+    }
+
+    public function getIsAvailable(): bool
+    {
+        return $this->isAvailable;
+    }
+
+    public function setIsAvailable(bool $isAvailable): self
+    {
+        $this->isAvailable = $isAvailable;
+        return $this;
     }
 
     // --- RELATIONS --- //

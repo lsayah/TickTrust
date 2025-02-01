@@ -7,19 +7,40 @@ body {
   background: linear-gradient(to right, #317873, #cbdcdb) !important;
 }
 
+.mb-4 {
+  margin-bottom: 0 !important;
+}
+
+/* sidebar */
+
+
+.sidebar .nav-item .nav-link {
+  color: #fff !important;
+}
+
+.sidebar .nav-item .nav-link:hover {
+  color: #fff !important;
+  background-color: #275e5e !important; /* Optionnel : couleur de survol */
+}
+
+.sidebar .sidebar-heading {
+  color: #fff !important;
+}
+
+
 /* Ticket Form Styles */
 .ticket-form-container {
-  max-width: 80%; 
-  height: 100vh;
-  margin: 0 auto;
+  max-width: 80%;
+  height: 80vh;
+  margin: 2% auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.container-fluid {
-    background: linear-gradient(to right, #317873, #cbdcdb) !important;
+#content-wrapper {
+  background: linear-gradient(to right, #317873, #cbdcdb) !important;
 }
 
 .ticket-form-container h1 {
@@ -27,58 +48,49 @@ body {
   margin-bottom: 20px;
 }
 
-.ticket-form-container .form-group {
+.form-group {
   margin-bottom: 15px;
 }
 
-.ticket-form-container .form-group label {
+.form-group label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
 }
 
-.ticket-form-container .form-group input,
-.ticket-form-container .form-group textarea,
-.ticket-form-container .form-group select {
+.form-group input,
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.ticket-form-container .form-group textarea {
-  resize: vertical;
+.form-group.text-center {
+  text-align: center;
 }
 
-.ticket-form-container .form-group.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 5%;
-  margin-top: 5%;
-}
-
-.ticket-form-container .btn-primary,
-.ticket-form-container .btn-secondary {
-  width: 20%;
-  padding: 10px;
-  border: none;
-  color: white;
+.btn {
+  padding: 10px 20px;
   border-radius: 4px;
-  cursor: pointer;
 }
 
-.ticket-form-container .btn-primary {
-  background-color: #317873; /* Couleur pour le bouton "Submit Ticket" */
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
 }
 
-.ticket-form-container .btn-primary:hover {
-  background-color: #5fcfc8; /* Couleur au survol pour le bouton "Submit Ticket" */
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
 }
 
-.ticket-form-container .btn-secondary {
-  background-color: #6c757d; /* Couleur pour le bouton "Save as Draft" */
+.btn-primary {
+  background-color: #317873;
+  
 }
 
-.ticket-form-container .btn-secondary:hover {
-  background-color: #b1b4b7; /* Couleur au survol pour le bouton "Save as Draft" */
+.btn-primary:hover {
+  background-color: #71d7d0;
+  
 }

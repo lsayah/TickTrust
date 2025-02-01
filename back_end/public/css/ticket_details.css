@@ -1,0 +1,66 @@
+/* Styles pour la page des détails du ticket */
+.container {
+  max-width: 90%;
+  margin: 20px auto;
+}
+
+.mb-4 {
+  margin-bottom: 0;
+}
+
+/* sidebar */
+.sidebar {
+  background-color: #317873 !important;
+}
+
+.sidebar .nav-item .nav-link {
+  color: #fff !important;
+}
+
+.sidebar .nav-item .nav-link:hover {
+  color: #fff !important;
+  background-color: #275e5e !important; /* Optionnel : couleur de survol */
+}
+
+.sidebar .sidebar-heading {
+  color: #fff !important;
+}
+
+/* details */
+.card {
+  position: relative;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 100%;
+  border-radius: 8px 0 0 8px;
+  background-color: var(--status-color);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.card-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.card-text strong {
+  font-weight: bold;
+}

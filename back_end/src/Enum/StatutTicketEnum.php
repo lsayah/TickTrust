@@ -17,5 +17,14 @@ enum StatutTicketEnum: int
         };
     }
 
+    public function color(): string
+    {
+        return match ($this) {
+            self::NOUVEAU => '#7F7F7F', // gris
+            self::EN_COURS => '#61A5DA', // bleu
+            self::RESOLU => '#28a745', // Vert
+        };
+    }
+
    
 }

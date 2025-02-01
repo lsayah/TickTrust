@@ -29,14 +29,6 @@ class TicketType extends AbstractType
                 ],
                 'label' => 'Categories',
             ])
-            ->add('priorite', ChoiceType::class, [
-                'choices' => [
-                    'Basse' => PrioriteTicketEnum::BASSE,
-                    'Normale' => PrioriteTicketEnum::NORMALE,
-                    'Haute' => PrioriteTicketEnum::HAUTE,
-                ],
-                'label' => 'Priorité',
-            ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'attr' => ['rows' => 10],

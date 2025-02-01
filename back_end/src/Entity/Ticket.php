@@ -50,6 +50,9 @@ class Ticket
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $service = null;
 
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    private ?User $technician = null;
+
     public function __construct()
     {
         $this->priorite = PrioriteTicketEnum::NORMALE->value;
@@ -180,6 +183,18 @@ class Ticket
     public function setService(ServiceEnum $service): static
     {
         $this->service = $service->value;
+
+        return $this;
+    }
+
+    public function getTechnician(): ?User
+    {
+        return $this->technician;
+    }
+
+    public function setTechnician(?User $technician): self
+    {
+        $this->technician = $technician;
 
         return $this;
     }
