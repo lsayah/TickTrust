@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ticket;
 use App\Entity\User;
 use App\Form\TicketType;
+use App\Form\TicketEditType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +58,7 @@ class TicketController extends AbstractController
     }
 
     #[Route('/ticket/{id}', name: 'ticket_details', requirements: ['id' => '\d+'])]
-    public function details(int $id, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage): Response
+    public function details(int $id, Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage): Response
     {
         $token = $tokenStorage->getToken();
         if (null === $token) {
@@ -74,8 +75,26 @@ class TicketController extends AbstractController
             throw $this->createNotFoundException('Le ticket n\'existe pas.');
         }
 
+        $form = $this->createForm(TicketEditType::class, $ticket);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Ajouter la nouvelle description sans supprimer l'ancienne
+            $newDescription = $form->get('description')->getData();
+            if ($newDescription) {
+                $ticket->setDescription($ticket->getDescription() . "\n\nNouvelle Description:\n" . $newDescription);
+            }
+
+            $ticket->setUpdatedAt(new \DateTimeImmutable());
+            $entityManager->persist($ticket);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('ticket_details', ['id' => $ticket->getId()]);
+        }
+
         return $this->render('ticket/ticket_details.html.twig', [
             'ticket' => $ticket,
+            'form' => $form->createView(),
         ]);
     }
 

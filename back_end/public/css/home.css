@@ -1,70 +1,62 @@
-/* Fond en gradient */
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: all 1s;
+}
+
 body {
     background: linear-gradient(to right, #317873, #cbdcdb);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    color: #999;
 }
 
-/* Centrer les éléments */
-.container {
+#welcome {
+    color: #317873;
+    text-shadow: 0 1px 3px rgb(100, 100, 100), -10px 0 8px rgb(48, 48, 48);
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100%;
-}
-
-.card {
+    min-height: 100vh;
+    min-width: 100vw;
+    overflow: hidden;
+    position: fixed;
     width: 100%;
-    max-width: 500px;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card-body {
-    padding: 2rem;
+#welcome div:hover {
+    text-shadow: 0 0 1px white, 0 0 0 black;
 }
 
-/* Styles pour les boutons */
-.btn-primary {
-    background-color: #317873;
-    border-color: #317873;
+#welcome div {
+    align-items: center;
+    background: #c0e4e2;
+    box-shadow: 0 0 100px black;
+    cursor: pointer;
+    display: flex;
+    font-size: 5em;
+    font-weight: bold;
+    width: 50%;
 }
 
-.btn-primary:hover {
-    background-color: #71d7d0;
-    border-color: #71d7d0;
+#left {
+    justify-content: flex-end;
 }
 
-.btn-success {
-    background-color: #317873;
-    border-color: #317873;
+#right {
+    justify-content: flex-start !important;
 }
 
-.btn-success:hover {
-    background-color: #71d7d0;
-    border-color: #71d7d0;
+.Of {
+    justify-content: flex-end;
+    width: 0 !important;
+    visibility: hidden;
 }
 
-/* Styles pour le texte */
-.text-center {
-    text-align: center;
+#Of {
+    width: 0;
 }
 
-.text-gray-900 {
-    color: #3a3b45;
+.On {
+    width: 100% !important;
 }
 
-.text-gray-800 {
-    color: #5a5c69;
-}
-
-/* Styles pour les images */
-.bg-login-image {
-    background: url('path/to/your/image.jpg');
-    background-size: cover;
-    background-position: center;
-}

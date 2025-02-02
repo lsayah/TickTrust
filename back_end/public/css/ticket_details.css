@@ -64,3 +64,9 @@
 .card-text strong {
   font-weight: bold;
 }
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

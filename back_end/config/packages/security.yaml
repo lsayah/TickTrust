@@ -35,9 +35,10 @@ security:
     # Contrôle d'accès (Access Control)
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/technician, roles: ROLE_TECHNICIAN }
+        
         - { path: ^/user, roles: ROLE_USER }
-
+        - { path: ^/technicians, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/technician, roles: [ROLE_USER, ROLE_ADMIN] }
 
 when@test:
     security:

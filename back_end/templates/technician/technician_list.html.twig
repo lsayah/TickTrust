@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails du Ticket{% endblock %}
+{% block title %}Liste des Techniciens{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/ticket_details.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/technician_list.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -92,43 +92,20 @@
             <!-- Main Content -->
             <div id="content">
                 <div class="container">
-                    <h1>Détails du Ticket</h1>
-                    <div class="card" style="--status-color: {{ ticket.statut.color() }}">
-                        <div class="card-body">
-                            {{ form_start(form) }}
-                            <div class="form-group">
-                                <label for="title"><strong>Titre:</strong></label>
-                                <p id="title">{{ ticket.title }}</p>
-                                {{ form_widget(form.title, { 'attr': { 'style': 'display: none;' } }) }}
+                    <h1>Liste des Techniciens</h1>
+                    <div class="row">
+                        {% for technician in technicians %}
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img src="{{ technician.photo }}" class="card-img-top" alt="{{ technician.nom }} {{ technician.prenom }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ technician.nom }} {{ technician.prenom }}</h5>
+                                        <p class="card-text">Disponibilité: {{ technician.isAvailable ? 'Disponible' : 'Indisponible' }}</p>
+                                        <a href="{{ path('technician_details', { 'id': technician.id }) }}" class="btn btn-primary">Voir Détails</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="category"><strong>Catégorie:</strong></label>
-                                <p id="category">{{ ticket.category }}</p>
-                                {{ form_widget(form.category, { 'attr': { 'style': 'display: none;' } }) }}
-                            </div>
-                            <div class="form-group">
-                                <label for="description"><strong>Description:</strong></label>
-                                <p id="description">{{ ticket.description }}</p>
-                                {{ form_widget(form.description, { 'attr': { 'style': 'display: none;' } }) }}
-                            </div>
-                            <div class="form-group" id="attachment-group" style="display: none;">
-                                <label for="attachments"><strong>Ajouter un fichier:</strong></label>
-                                {{ form_widget(form.attachments) }}
-                            </div>
-                            <p class="card-text"><strong>Statut:</strong> {{ ticket.statut.toString() }}</p>
-                            <p class="card-text"><strong>Priorité:</strong> {{ ticket.priorite.toString() }}</p>
-                            <p class="card-text"><strong>Service:</strong> {{ ticket.service.label() }}</p>
-                            {% if ticket.technician %}
-                                <p class="card-text"><strong>Technicien Assigné:</strong> {{ ticket.technician.nom }} {{ ticket.technician.prenom }}</p>
-                            {% else %}
-                                <p class="card-text"><strong>Technicien Assigné:</strong> Aucun technicien assigné</p>
-                            {% endif %}
-                            <p class="card-text"><strong>Date de création:</strong> {{ ticket.createdAt|date('Y-m-d H:i') }}</p>
-                            <p class="card-text"><strong>Date de mise à jour:</strong> {{ ticket.updatedAt|date('Y-m-d H:i') }}</p>
-                            <button id="edit-button" class="btn btn-primary">Modifier</button>
-                            <button type="submit" id="save-button" class="btn btn-primary" style="display: none;">Enregistrer les modifications</button>
-                            {{ form_end(form) }}
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -147,17 +124,4 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-    <script>
-        document.getElementById('edit-button').addEventListener('click', function() {
-            document.getElementById('edit-button').style.display = 'none';
-            document.getElementById('save-button').style.display = 'inline-block';
-            document.querySelectorAll('p').forEach(function(p) {
-                p.style.display = 'none';
-            });
-            document.querySelectorAll('input, textarea').forEach(function(input) {
-                input.style.display = 'block';
-            });
-            document.getElementById('attachment-group').style.display = 'block';
-        });
-    </script>
 {% endblock %}

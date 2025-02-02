@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Technicien{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/technician_details.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class=""></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">TickTrust</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('dashboard_user') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Ticket</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Ticket:</h6>
+                        <a class="collapse-item" href="{{ path('ticket_new') }}">Nouveau Ticket</a>
+                        <a class="collapse-item" href="{{ path('user_ticket_list') }}">Tout Mes Tickets</a>
+                        <a class="collapse-item" href="cards.html">Statistique des tickets</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Assistance et Suivie</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="utilities-color.html">Messagerie</a>
+                        <a class="collapse-item" href="utilities-border.html">Historiques des Interventions</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <div class="container">
+                    <h1>Détails du Technicien</h1>
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{ technician.photo }}" class="card-img-top" alt="{{ technician.nom }} {{ technician.prenom }}">
+                            <h5 class="card-title">{{ technician.nom }} {{ technician.prenom }}</h5>
+                            <p class="card-text">Service: {{ technician.service.label() }}</p>
+                            <p class="card-text">Disponibilité: {{ technician.isAvailable ? 'Disponible' : 'Indisponible' }}</p>
+                            <h3>Tickets</h3>
+                            <ul>
+                                {% for ticket in tickets %}
+                                    <li>{{ ticket.title }} - {{ ticket.getStatus() }}</li>
+                                {% endfor %}
+                            </ul>
+                            <!-- Ajoutez d'autres informations nécessaires -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
