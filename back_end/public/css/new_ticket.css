@@ -32,7 +32,7 @@ body {
 .ticket-form-container {
   max-width: 80%;
   height: 80vh;
-  margin: 2% auto;
+  margin: 3% auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -40,7 +40,7 @@ body {
 }
 
 #content-wrapper {
-  background: linear-gradient(to right, #317873, #cbdcdb) !important;
+  background: #f8f9fc !important;
 }
 
 .ticket-form-container h1 {

@@ -8,6 +8,11 @@
   margin-bottom: 0;
 }
 
+.container h1 {
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
 /* sidebar */
 .sidebar {
   background-color: #317873 !important;
@@ -29,10 +34,25 @@
 /* details */
 .card {
   position: relative;
-  padding: 20px;
+  padding: 0 0 0 1%;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+}
+
+.card-header {
+  width: 100%;
+  background-color: #f8f9fc;
+  border-bottom: 1px solid #e3e6f0;
+  padding: 1rem 1.5rem;
+  border-radius: 8px 8px 0 0;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #317873;
 }
 
 .card::before {
@@ -56,9 +76,19 @@
   margin-bottom: 20px;
 }
 
+.form-group {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+
+label {
+  margin-right: 0.5%;
+}
+
 .card-text {
   font-size: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 2%;
 }
 
 .card-text strong {
@@ -69,4 +99,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#edit-button {
+  margin-top: 5%;
+  margin-bottom: 0;
+  
 }

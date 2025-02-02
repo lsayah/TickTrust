@@ -70,8 +70,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Messagerie</a>
-                        <a class="collapse-item" href="utilities-border.html">Historiques des Interventions</a>
+                        <a class="collapse-item" href="{{ path('technician_list') }}">Contacter un Technicien</a>
+                        <a class="collapse-item" href="utilities-border.html">Toutes les Interventions</a>
                     </div>
                 </div>
             </li>
@@ -94,6 +94,9 @@
                 <div class="container">
                     <h1>Détails du Ticket</h1>
                     <div class="card" style="--status-color: {{ ticket.statut.color() }}">
+                        <div class="card-header">
+                            <h2>Détails du Ticket #{{ ticket.id }}</h2>
+                        </div>
                         <div class="card-body">
                             {{ form_start(form) }}
                             <div class="form-group">
@@ -125,7 +128,7 @@
                             {% endif %}
                             <p class="card-text"><strong>Date de création:</strong> {{ ticket.createdAt|date('Y-m-d H:i') }}</p>
                             <p class="card-text"><strong>Date de mise à jour:</strong> {{ ticket.updatedAt|date('Y-m-d H:i') }}</p>
-                            <button id="edit-button" class="btn btn-primary">Modifier</button>
+                            <button id="edit-button" class="btn btn-primary">Editer le ticket</button>
                             <button type="submit" id="save-button" class="btn btn-primary" style="display: none;">Enregistrer les modifications</button>
                             {{ form_end(form) }}
                         </div>
