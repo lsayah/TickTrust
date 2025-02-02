@@ -110,3 +110,31 @@ body {
   background-color: #71d7d0;
 
 }
+
+
+
+/* historique */
+
+.clickable-row {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.clickable-row:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table tbody tr {
+  display: table-row;
+  vertical-align: middle;
+}
+
+.table tbody tr td {
+  vertical-align: middle;
+}
+
+#dataTable_filter {
+  display: flex;
+  justify-content: flex-end;
+}

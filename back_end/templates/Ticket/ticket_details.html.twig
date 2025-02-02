@@ -120,7 +120,7 @@
                             </div>
                             <p class="card-text"><strong>Statut:</strong> {{ ticket.statut.toString() }}</p>
                             <p class="card-text"><strong>Priorité:</strong> {{ ticket.priorite.toString() }}</p>
-                            <p class="card-text"><strong>Service:</strong> {{ ticket.service.label() }}</p>
+                            <p class="card-text"><strong>Service:</strong> {{ ticket.service ? ticket.service.label() : 'Non défini' }}</p>
                             {% if ticket.technician %}
                                 <p class="card-text"><strong>Technicien Assigné:</strong> {{ ticket.technician.nom }} {{ ticket.technician.prenom }}</p>
                             {% else %}

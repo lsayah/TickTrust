@@ -75,6 +75,11 @@ class TicketController extends AbstractController
             throw $this->createNotFoundException('Le ticket n\'existe pas.');
         }
 
+        // Vérifier et gérer les valeurs nulles pour service
+        if ($ticket->getService() === null) {
+            $ticket->setService(ServiceEnum::NONE); // Remplacez NONE par une valeur par défaut appropriée
+        }
+
         $form = $this->createForm(TicketEditType::class, $ticket);
         $form->handleRequest($request);
 
@@ -140,7 +145,7 @@ class TicketController extends AbstractController
         // Récupérer l'historique des tickets initiés par l'utilisateur
         $ticketHistory = $entityManager->getRepository(Ticket::class)->findBy(
             ['idAuteur' => $user],
-            ['createdAt' => 'DESC']
+            ['createdAt' => 'DESC'] // Trier par date de création dans l'ordre décroissant
         );
 
         return $this->render('users/dashboard_user.html.twig', [
@@ -165,7 +170,7 @@ class TicketController extends AbstractController
         // Récupérer tous les tickets de l'utilisateur
         $tickets = $entityManager->getRepository(Ticket::class)->findBy(
             ['idAuteur' => $user],
-            ['createdAt' => 'DESC']
+            ['createdAt' => 'DESC'] // Trier par date de création dans l'ordre décroissant
         );
 
         return $this->render('Ticket/ticket_list_user.html.twig', [

@@ -358,19 +358,32 @@
                                                 Historique des tickets
                                             </div>
                                             {% if ticketHistory is defined %}
-                                                <ul class="ticket-history">
-                                                    {% for ticket in ticketHistory %}
-                                                        <li>
-                                                            <a href="{{ path('ticket_details', { 'id': ticket.id }) }}" class="ticket-link">
-                                                                <div class="ticket-details">
-                                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ ticket.title }}</div>
-                                                                    <div class="text-xs text-gray-800">Statut: {{ ticket.statut.toString() }}</div>
-                                                                    <div class="text-xs text-gray-800">Priorité: {{ ticket.priorite.toString() }}</div>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Titre</th>
+                                                                <th>Description</th>
+                                                                <th>Statut</th>
+                                                                <th>Date de Création</th>
+                                                                <th>Dernière Mise à Jour</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for ticket in ticketHistory %}
+                                                                <tr class="clickable-row" data-href="{{ path('ticket_details', { 'id': ticket.id }) }}">
+                                                                    <td>{{ ticket.id }}</td>
+                                                                    <td>{{ ticket.title }}</td>
+                                                                    <td>{{ ticket.description }}</td>
+                                                                    <td>{{ ticket.getStatut().toString() }}</td>
+                                                                    <td>{{ ticket.createdAt|date('Y-m-d H:i') }}</td>
+                                                                    <td>{{ ticket.updatedAt|date('Y-m-d H:i') }}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             {% else %}
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Aucun historique de ticket</div>
                                             {% endif %}
@@ -432,15 +445,24 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('js/dashboard_user.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                "order": [[4, "desc"]] // Trier par la 5ème colonne (Date de Création) dans l'ordre décroissant
+             });
+
+            $('.clickable-row').click(function() {
+                window.location = $(this).data('href');
+            });
+        });
+    </script>
 
 </body>
 
