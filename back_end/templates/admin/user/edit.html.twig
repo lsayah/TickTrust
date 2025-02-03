@@ -1,0 +1,22 @@
+{% extends 'admin/dashboard_admin.html.twig' %}
+
+{% block title %}Modifier le rôle de l'utilisateur{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Modifier le rôle de l'utilisateur</h1>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Modifier le rôle de {{ user.nom }} {{ user.prenom }}</h6>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Mettre à jour le rôle</button>
+                    <a href="{{ path('admin_user_list') }}" class="btn btn-danger">Annuler</a>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

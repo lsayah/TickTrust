@@ -1,0 +1,33 @@
+{% extends 'admin/dashboard_admin.html.twig' %}
+
+{% block title %}Modifier le profil{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Modifier le profil</h1>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Modifier les informations du profil</h6>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.nom) }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.prenom) }}
+                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">Éditer le profil</button>
+                    <a href="{{ path('app_profile') }}" class="btn btn-danger">Annuler</a>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

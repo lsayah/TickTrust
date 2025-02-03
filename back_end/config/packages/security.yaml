@@ -12,7 +12,7 @@ security:
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js)/  # Désactive la sécurité pour les assets et le profiler Symfony
             security: false
 
         main:
@@ -25,19 +25,25 @@ security:
                 default_target_path: app_home
                 username_parameter: _email    # Changer pour utiliser l'email
                 password_parameter: _password
-                success_handler: App\Security\LoginSuccessHandler # Ajoutez cette ligne
+                success_handler: App\Security\LoginSuccessHandler # Gestion personnalisée après connexion
             
             logout:
                 path: /logout
                 target: app_logout_success
-                
 
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 7 jours
+                path: /
+            
     # Contrôle d'accès (Access Control)
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/technician, roles: ROLE_TECHNICIAN }
         - { path: ^/user, roles: ROLE_USER }
-
+        - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }  # Protection de la page profil
+        - { path: ^/profile/edit, roles: IS_AUTHENTICATED_FULLY }  # Protection de la modification du profil
+        - { path: ^/profile/change-password, roles: IS_AUTHENTICATED_FULLY }  # Protection du changement de mot de passe
 
 when@test:
     security:
@@ -47,6 +53,3 @@ when@test:
                 cost: 4 # Valeur minimale pour bcrypt
                 time_cost: 3 # Valeur minimale pour argon
                 memory_cost: 10 # Valeur minimale pour argon
-
-
-

@@ -1,0 +1,57 @@
+{% extends 'admin/dashboard_admin.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Liste des utilisateurs</h1>
+    <p class="mb-4">Voici la liste des utilisateurs avec des options pour modifier et supprimer.</p>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Utilisateurs</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Rôles</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Rôles</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.nom }} {{ user.prenom }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.roles|json_encode }}</td>
+                                <td>
+                                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+                                    <form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}" style="display:inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                        <button class="btn btn-danger btn-sm">Supprimer</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
