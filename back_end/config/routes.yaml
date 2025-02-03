@@ -32,6 +32,34 @@ app_logout_success:
     controller: App\Controller\LogoutController::logoutSuccess
 
 
+# Profile Routes
+app_profile:
+    path: /profile
+    controller: App\Controller\ProfileController::index
+
+app_profile_edit:
+    path: /profile/edit
+    controller: App\Controller\ProfileController::edit
+
+app_profile_change_password:
+    path: /profile/change-password
+    controller: App\Controller\ProfileController::changePassword
+
+
+# Admin User Management Routes
+admin_user_list:
+    path: /admin/users
+    controller: App\Controller\AdminController::listUsers
+
+admin_user_edit:
+    path: /admin/users/edit/{id}
+    controller: App\Controller\AdminController::editUser
+
+admin_user_delete:
+    path: /admin/users/delete/{id}
+    controller: App\Controller\AdminController::deleteUser
+    methods: [POST]
+
 
 # Tickets
 
@@ -42,3 +70,4 @@ ticket_new:
 ticket_list:
     path: /ticket/list
     controller: App\Controller\TicketController::list
+

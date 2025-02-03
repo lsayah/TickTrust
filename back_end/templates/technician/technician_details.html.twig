@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/technician_details.css') }}">
 {% endblock %}
 
+
 {% block body %}
     <div id="wrapper">
         <!-- Sidebar -->
@@ -26,7 +27,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ path('dashboard_user') }}">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -70,8 +71,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Messagerie</a>
-                        <a class="collapse-item" href="utilities-border.html">Historiques des Interventions</a>
+                        <a class="collapse-item" href="{{ path('technician_list') }}">Contacter un Technicien</a>
+                        <a class="collapse-item" href="utilities-border.html">Toute les Interventions</a>
                     </div>
                 </div>
             </li>
@@ -102,7 +103,7 @@
                             <h3>Tickets</h3>
                             <ul>
                                 {% for ticket in tickets %}
-                                    <li>{{ ticket.title }} - {{ ticket.getStatut() }}</li>
+                                    <li>{{ ticket.title }} - {{ ticket.getStatut().toString() }}</li>
                                 {% endfor %}
                             </ul>
                             <!-- Ajoutez d'autres informations nécessaires -->

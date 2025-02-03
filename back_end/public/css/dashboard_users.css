@@ -138,3 +138,11 @@ body {
   display: flex;
   justify-content: flex-end;
 }
+
+.active a {
+  background: #317873 !important;
+}
+
+.pagination a {
+  color: #317873;
+}
