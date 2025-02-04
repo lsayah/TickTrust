@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfileType;
-use App\Form\ChangePasswordType;
+use App\Form\ChangePassword;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,7 +55,7 @@ final class ProfileController extends AbstractController
             throw new \LogicException('Utilisateur non trouvé.');
         }
 
-        $form = $this->createForm(ChangePasswordType::class);
+        $form = $this->createForm(ChangePassword::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

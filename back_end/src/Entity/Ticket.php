@@ -53,6 +53,8 @@ class Ticket
     #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $technician = null;
 
+   
+
     public function __construct()
     {
         $this->priorite = PrioriteTicketEnum::NORMALE->value;
@@ -198,6 +200,8 @@ class Ticket
 
         return $this;
     }
+
+
 
 
      /**

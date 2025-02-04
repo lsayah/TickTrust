@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ticket;
 use App\Entity\User;
-use App\Form\TicketType;
+use App\Form\TicketFormType;
 use App\Form\TicketEditType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Notifier\Notification\Notification;
+use Symfony\Component\Notifier\NotifierInterface;
 
 class TicketController extends AbstractController
 {
@@ -30,7 +32,7 @@ class TicketController extends AbstractController
         }
 
         $ticket = new Ticket();
-        $form = $this->createForm(TicketType::class, $ticket);
+        $form = $this->createForm(TicketFormType::class, $ticket);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -177,4 +179,21 @@ class TicketController extends AbstractController
             'tickets' => $tickets,
         ]);
     }
+
+    public function assignTechnician(Ticket $ticket, User $technician, NotifierInterface $notifier)
+    {
+        $ticket->setTechnician($technician);
+        $technician->setIsAvailable(false);
+        $this->entityManager->persist($ticket);
+        $this->entityManager->persist($technician);
+        $this->entityManager->flush();
+
+        // Envoyer une notification au technicien
+        $notification = (new Notification('Nouveau ticket assigné', ['email']))
+            ->content('Un nouveau ticket vous a été assigné. Veuillez vérifier votre tableau de bord pour plus de détails.');
+        $notifier->send($notification, $technician->getEmail());
+
+        return $this->redirectToRoute('ticket_details', ['id' => $ticket->getId()]);
+    }
+
 }

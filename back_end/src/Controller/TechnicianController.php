@@ -12,6 +12,21 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class TechnicianController extends AbstractController
 {
+
+
+    #[Route('/technician/dashboard', name: 'technician_dashboard')]
+    public function dashboard(): Response
+    {
+        $user = $this->getUser();
+        if (!$user || !in_array('ROLE_TECHNICIAN', $user->getRoles())) {
+            throw new AccessDeniedException('Vous devez être connecté en tant que technicien pour accéder à cette page.');
+        }
+
+        return $this->render('admin/dashboard_admin.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
     #[Route('/technicians', name: 'technician_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {
