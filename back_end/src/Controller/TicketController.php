@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ticket;
 use App\Entity\User;
+use App\Entity\Intervention;
 use App\Form\TicketFormType;
 use App\Form\TicketEditType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -77,10 +78,8 @@ class TicketController extends AbstractController
             throw $this->createNotFoundException('Le ticket n\'existe pas.');
         }
 
-        // Vérifier et gérer les valeurs nulles pour service
-        if ($ticket->getService() === null) {
-            $ticket->setService(ServiceEnum::NONE); // Remplacez NONE par une valeur par défaut appropriée
-        }
+        // Récupérer les interventions associées au ticket
+        $interventions = $entityManager->getRepository(Intervention::class)->findBy(['ticket' => $ticket]);
 
         $form = $this->createForm(TicketEditType::class, $ticket);
         $form->handleRequest($request);
@@ -101,6 +100,7 @@ class TicketController extends AbstractController
 
         return $this->render('ticket/ticket_details.html.twig', [
             'ticket' => $ticket,
+            'interventions' => $interventions,
             'form' => $form->createView(),
         ]);
     }
