@@ -53,13 +53,17 @@ class Ticket
     #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $technician = null;
 
-   
+   /**
+     * @ORM\OneToMany(targetEntity=Intervention::class, mappedBy="ticket", orphanRemoval=true)
+     */
+    private $interventions;
 
     public function __construct()
     {
         $this->priorite = PrioriteTicketEnum::NORMALE->value;
         $this->statut = StatutTicketEnum::NOUVEAU->value;
         $this->service = ServiceEnum::NONE->value;
+        $this->interventions = new ArrayCollection();
     }
 
     // Getters and setters...
@@ -201,8 +205,37 @@ class Ticket
         return $this;
     }
 
+    /**
+     * @return Collection|Intervention[]
+     */
+    public function getInterventions(): Collection
+    {
+        return $this->interventions;
+    }
 
+    public function addIntervention(Intervention $intervention): self
+    {
+        if (!$this->interventions->contains($intervention)) {
+            $this->interventions[] = $intervention;
+            $intervention->setTicket($this);
+        }
 
+        return $this;
+    }
+
+    public function removeIntervention(Intervention $intervention): self
+    {
+        if ($this->interventions->removeElement($intervention)) {
+            // set the owning side to null (unless already changed)
+            if ($intervention->getTicket() === $this) {
+                $intervention->setTicket(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
 
      /**
      * @return Collection<int, Affectation>

@@ -365,34 +365,13 @@
                     <!-- End of Topbar -->
             
                 <div class="container">
-                    <h1 class="mt-4">Tableau de bord Technicien</h1>
-                    <h2 class="mt-4">Tickets assignés</h2>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Titre</th>
-                                <th>Catégorie</th>
-                                <th>Priorité</th>
-                                <th>Statut</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for ticket in tickets %}
-                                <tr>
-                                    <td>{{ ticket.id }}</td>
-                                    <td>{{ ticket.title }}</td>
-                                    <td>{{ ticket.category }}</td>
-                                    <td>{{ ticket.priorite.toString() }}</td>
-                                    <td>{{ ticket.statut.toString() }}</td>
-                                    <td>
-                                        <a href="{{ path('technician_intervention', {'id': ticket.id}) }}" class="btn btn-primary btn-sm">Intervenir</a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    <h1 class="mt-4">Intervention sur le ticket #{{ ticket.id }}</h1>
+                    <h2 class="mt-4">{{ ticket.title }}</h2>
+                    <p>{{ ticket.description }}</p>
+
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                    {{ form_end(form) }}
                 </div>
     </main>
 

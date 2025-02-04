@@ -63,12 +63,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $plainPassword = null;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Intervention::class, mappedBy="technician", orphanRemoval=true)
+     */
+    private $interventions;
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->affectations = new ArrayCollection();
         $this->service = ServiceEnum::NONE;
+        $this->interventions = new ArrayCollection();
     }
 
     // --- GETTERS & SETTERS --- //
@@ -223,6 +229,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsAvailable(bool $isAvailable): self
     {
         $this->isAvailable = $isAvailable;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Intervention[]
+     */
+    public function getInterventions(): Collection
+    {
+        return $this->interventions;
+    }
+
+    public function addIntervention(Intervention $intervention): self
+    {
+        if (!$this->interventions->contains($intervention)) {
+            $this->interventions[] = $intervention;
+            $intervention->setTechnician($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIntervention(Intervention $intervention): self
+    {
+        if ($this->interventions->removeElement($intervention)) {
+            // set the owning side to null (unless already changed)
+            if ($intervention->getTechnician() === $this) {
+                $intervention->setTechnician(null);
+            }
+        }
+
         return $this;
     }
 
