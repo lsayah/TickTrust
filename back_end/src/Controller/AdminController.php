@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Ticket;
 use App\Form\UserRoleType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,23 +18,42 @@ class AdminController extends AbstractController
      * @Route("/admin/dashboard", name="admin_dashboard")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function dashboard(): Response
+    public function dashboard(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('admin/dashboard_admin.html.twig');
+        $technicians = $entityManager->getRepository(User::class)->findBy(['role' => 'ROLE_TECHNICIAN']);
+        $totalTickets = $entityManager->getRepository(Ticket::class)->count([]);
+        $activeTickets = $entityManager->getRepository(Ticket::class)->count(['statut' => 'active']);
+        $closedTickets = $entityManager->getRepository(Ticket::class)->count(['statut' => 'closed']);
+
+        // Convertir les services en chaînes de caractères
+        foreach ($technicians as $technician) {
+            if ($technician->getService() instanceof \App\Enum\ServiceEnum) {
+                $technician->serviceLabel = $technician->getService()->label();
+            } else {
+                $technician->serviceLabel = 'Unknown';
+            }
+        }
+
+        return $this->render('admin/dashboard_admin.html.twig', [
+            'technicians' => $technicians,
+            'totalTickets' => $totalTickets,
+            'activeTickets' => $activeTickets,
+            'closedTickets' => $closedTickets,
+        ]);
     }
-/**
- * @Route("/admin/users", name="admin_user_list")
- */
-// @IsGranted("ROLE_ADMIN")
-public function listUsers(EntityManagerInterface $entityManager): Response
-{
-    $users = $entityManager->getRepository(User::class)->findAll();
 
-    return $this->render('admin/user/index.html.twig', [
-        'users' => $users,
-    ]);
-}
+    /**
+     * @Route("/admin/users", name="admin_user_list")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function listUsers(EntityManagerInterface $entityManager): Response
+    {
+        $users = $entityManager->getRepository(User::class)->findAll();
 
+        return $this->render('admin/user/index.html.twig', [
+            'users' => $users,
+        ]);
+    }
 
     /**
      * @Route("/admin/users/edit/{id}", name="admin_user_edit")

@@ -24,3 +24,10 @@
 .sidebar .sidebar-heading {
   color: #fff !important;
 }
+
+
+
+.img {
+  width: 10%;
+  object-fit: cover;
+}

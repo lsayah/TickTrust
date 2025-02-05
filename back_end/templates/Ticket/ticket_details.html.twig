@@ -46,7 +46,7 @@
             {% endif %}
             <p class="card-text"><strong>Date de création:</strong> {{ ticket.createdAt|date('Y-m-d H:i') }}</p>
             <p class="card-text"><strong>Date de mise à jour:</strong> {{ ticket.updatedAt|date('Y-m-d H:i') }}</p>
-            <button id="edit-button" class="btn btn-primary">Editer le ticket</button>
+            <button id="edit-button" class="btn btn-primary" type="button">Editer le ticket</button>
             <button type="submit" id="save-button" class="btn btn-primary" style="display: none;">Enregistrer les modifications</button>
             {{ form_end(form) }}
         </div>
@@ -88,6 +88,9 @@
             document.getElementById('category').style.display = 'none';
             document.getElementById('description').style.display = 'none';
             document.getElementById('attachment-group').style.display = 'block';
+            document.querySelectorAll('input, textarea').forEach(function(element) {
+                element.style.display = 'block';
+            });
         });
     </script>
 {% endblock %}

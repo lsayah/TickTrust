@@ -88,7 +88,7 @@ class TicketController extends AbstractController
             // Ajouter la nouvelle description sans supprimer l'ancienne
             $newDescription = $form->get('description')->getData();
             if ($newDescription) {
-                $ticket->setDescription($ticket->getDescription() . "\n\nNouvelle Description:\n" . $newDescription);
+                $ticket->setDescription($newDescription);
             }
 
             $ticket->setUpdatedAt(new \DateTimeImmutable());
