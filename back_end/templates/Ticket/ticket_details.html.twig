@@ -9,62 +9,64 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Détails du Ticket</h1>
-    <div class="card" style="--status-color: {{ ticket.statut.color() }}">
-        <div class="card-header">
-            <h2>Détails du Ticket #{{ ticket.id }}</h2>
-        </div>
-        <div class="card-body">
-            {{ form_start(form) }}
-            <div class="form-group">
-                <label for="title"><strong>Titre:</strong></label>
-                <p id="title">{{ ticket.title }}</p>
-                {{ form_widget(form.title, { 'attr': { 'style': 'display: none;' } }) }}
+<div class="wrapper">
+    <div class="container">
+        <h1>Détails du Ticket</h1>
+        <div class="card" style="--status-color: {{ ticket.statut.color() }}">
+            <div class="card-header">
+                <h2>Détails du Ticket #{{ ticket.id }}</h2>
             </div>
-            <div class="form-group">
-                <label for="category"><strong>Catégorie:</strong></label>
-                <p id="category">{{ ticket.category }}</p>
-                {{ form_widget(form.category, { 'attr': { 'style': 'display: none;' } }) }}
-            </div>
-            <div class="form-group">
-                <label for="description"><strong>Description:</strong></label>
-                <p id="description">{{ ticket.description }}</p>
-                {{ form_widget(form.description, { 'attr': { 'style': 'display: none;' } }) }}
-            </div>
-            <div class="form-group" id="attachment-group" style="display: none;">
-                <label for="attachments"><strong>Ajouter un fichier:</strong></label>
-                {{ form_widget(form.attachments) }}
-            </div>
-            <p class="card-text"><strong>Statut:</strong> {{ ticket.statut.toString() }}</p>
-            <p class="card-text"><strong>Priorité:</strong> {{ ticket.priorite.toString() }}</p>
-            <p class="card-text"><strong>Service:</strong> {{ ticket.service ? ticket.service.label() : 'Non défini' }}</p>
-            {% if ticket.technician %}
-                <p class="card-text"><strong>Technicien Assigné:</strong> {{ ticket.technician.nom }} {{ ticket.technician.prenom }}</p>
-            {% else %}
-                <p class="card-text"><strong>Technicien Assigné:</strong> Aucun technicien assigné</p>
-            {% endif %}
-            <p class="card-text"><strong>Date de création:</strong> {{ ticket.createdAt|date('Y-m-d H:i') }}</p>
-            <p class="card-text"><strong>Date de mise à jour:</strong> {{ ticket.updatedAt|date('Y-m-d H:i') }}</p>
-            <button id="edit-button" class="btn btn-primary" type="button">Editer le ticket</button>
-            <button type="submit" id="save-button" class="btn btn-primary" style="display: none;">Enregistrer les modifications</button>
-            {{ form_end(form) }}
-        </div>
-    </div>
-
-    <h2>Interventions</h2>
-    <div id="interventions">
-        {% for intervention in interventions %}
-            <div class="card mt-3">
-                <div class="card-body">
-                    <p><strong>Technicien:</strong> {{ intervention.technician.nom }} {{ intervention.technician.prenom }}</p>
-                    <p><strong>Détails:</strong> {{ intervention.details }}</p>
-                    <p><strong>Date:</strong> {{ intervention.createdAt|date('Y-m-d H:i') }}</p>
+            <div class="card-body">
+                {{ form_start(form) }}
+                <div class="form-group">
+                    <label for="title"><strong>Titre:</strong></label>
+                    <p id="title">{{ ticket.title }}</p>
+                    {{ form_widget(form.title, { 'attr': { 'style': 'display: none;' } }) }}
                 </div>
+                <div class="form-group">
+                    <label for="category"><strong>Catégorie:</strong></label>
+                    <p id="category">{{ ticket.category }}</p>
+                    {{ form_widget(form.category, { 'attr': { 'style': 'display: none;' } }) }}
+                </div>
+                <div class="form-group">
+                    <label for="description"><strong>Description:</strong></label>
+                    <p id="description">{{ ticket.description }}</p>
+                    {{ form_widget(form.description, { 'attr': { 'style': 'display: none;' } }) }}
+                </div>
+                <div class="form-group" id="attachment-group" style="display: none;">
+                    <label for="attachments"><strong>Ajouter un fichier:</strong></label>
+                    {{ form_widget(form.attachments) }}
+                </div>
+                <p class="card-text"><strong>Statut:</strong> {{ ticket.statut.toString() }}</p>
+                <p class="card-text"><strong>Priorité:</strong> {{ ticket.priorite.toString() }}</p>
+                <p class="card-text"><strong>Service:</strong> {{ ticket.service ? ticket.service.label() : 'Non défini' }}</p>
+                {% if ticket.technician %}
+                    <p class="card-text"><strong>Technicien Assigné:</strong> {{ ticket.technician.nom }} {{ ticket.technician.prenom }}</p>
+                {% else %}
+                    <p class="card-text"><strong>Technicien Assigné:</strong> Aucun technicien assigné</p>
+                {% endif %}
+                <p class="card-text"><strong>Date de création:</strong> {{ ticket.createdAt|date('Y-m-d H:i') }}</p>
+                <p class="card-text"><strong>Date de mise à jour:</strong> {{ ticket.updatedAt|date('Y-m-d H:i') }}</p>
+                <button id="edit-button" class="btn btn-primary" type="button">Editer le ticket</button>
+                <button type="submit" id="save-button" class="btn btn-primary" style="display: none;">Enregistrer les modifications</button>
+                {{ form_end(form) }}
             </div>
-        {% else %}
-            <p>Aucune intervention trouvée.</p>
-        {% endfor %}
+        </div>
+
+        <h2>Interventions</h2>
+        <div id="interventions">
+            {% for intervention in interventions %}
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <p><strong>Technicien:</strong> {{ intervention.technician.nom }} {{ intervention.technician.prenom }}</p>
+                        <p><strong>Détails:</strong> {{ intervention.details }}</p>
+                        <p><strong>Date:</strong> {{ intervention.createdAt|date('Y-m-d H:i') }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucune intervention trouvée.</p>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}
